@@ -4,7 +4,7 @@
 #
 # @example
 #   include puppet_serverlist_update
-class puppet_serverlist_append {
+class puppet_serverlist_update {
 
   exec { 'append':
     command => '/bin/echo "some_list = puppet.example.com" >> /etc/puppetlabs/puppet/puppet.conf',
