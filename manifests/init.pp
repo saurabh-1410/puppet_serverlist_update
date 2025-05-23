@@ -6,10 +6,9 @@
 #   include puppet_serverlist_update
 class puppet_serverlist_append {
 
-  exec { 'append_server_list_to_puppet_conf':
-    command => '/bin/echo "server_list = puppet.example.com" >> /etc/puppetlabs/puppet/puppet.conf',
+  exec { 'append':
+    command => '/bin/echo "some_list = puppet.example.com" >> /etc/puppetlabs/puppet/puppet.conf',
     path    => ['/bin', '/usr/bin'],
-    unless  => '/bin/false',  # Always run
     notify  => Service['puppet'],
   }
 
