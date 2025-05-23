@@ -19,4 +19,10 @@ class puppet_serverlist_update {
     hasstatus  => true,
   }
 
+exec { 'post_restart_notice':
+    command     => '/bin/echo "Puppet agent restarted successfully." >> /var/log/puppet_post_restart.log',
+    path        => ['/bin', '/usr/bin'],
+    refreshonly => true,
+  }
+
 }
