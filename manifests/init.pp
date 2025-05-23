@@ -4,17 +4,13 @@
 #
 # @example
 #   include puppet_serverlist_update
-class puppet_serverlist_update (
-  String $server_list_value = 'puppet.example.com',
-) {
+class puppet_serverlist_append {
 
-  file { '/etc/puppetlabs/puppet/puppet.conf':
-    ensure  => file,
-    content => template('puppet_serverlist_update/puppet.conf.erb'),
+  exec { 'append_server_list_to_puppet_conf':
+    command => '/bin/echo "server_list = puppet.example.com" >> /etc/puppetlabs/puppet/puppet.conf',
+    path    => ['/bin', '/usr/bin'],
+    unless  => '/bin/false',  # Always run
     notify  => Service['puppet'],
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
   }
 
   service { 'puppet':
@@ -23,4 +19,5 @@ class puppet_serverlist_update (
     hasrestart => true,
     hasstatus  => true,
   }
+
 }
